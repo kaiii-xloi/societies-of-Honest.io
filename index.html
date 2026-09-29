@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #07070b;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: #6c2cff;
+      filter: blur(140px);
+      opacity: 0.35;
+      top: -100px;
+      left: -100px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: #00d9ff;
+      filter: blur(150px);
+      opacity: 0.2;
+      bottom: -100px;
+      right: -100px;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1000px;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      background: linear-gradient(90deg,#8b5cff,#00d9ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 20px 50px;
+    }
+
+    .badge {
+      padding: 8px 15px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 10vw, 90px);
+      line-height: 1;
+      max-width: 900px;
+      background: linear-gradient(90deg,#fff,#9d7cff,#00d9ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: #aaa;
+      margin: 25px 0;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 14px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: white;
+      transition: .3s;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: linear-gradient(90deg,#713cff,#00aaff);
+      box-shadow: 0 0 25px rgba(100,70,255,.35);
+    }
+
+    .secondary {
+      border: 1px solid #333;
+      background: rgba(255,255,255,.05);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Section */
+    section {
+      padding: 100px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .title h2 {
+      font-size: 40px;
+    }
+
+    .title p {
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(15px);
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #765cff;
+      box-shadow: 0 10px 40px rgba(80,50,255,.15);
+    }
+
+    .icon {
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #999;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* About */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .about-box {
+      padding: 35px;
+      border-radius: 25px;
+      background: linear-gradient(
+        135deg,
+        rgba(120,80,255,.15),
+        rgba(0,200,255,.05)
+      );
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .about-box p {
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #222;
+      color: #777;
+    }
+
+    /* Mobile */
+    @media(max-width:700px) {
+
+      nav {
+        width: 94%;
+      }
+
+      nav a {
+        display: none;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .title h2 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">NEXORA</div>
+
+    <div>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div class="badge">
+      ✦ Modern • Fast • Creative
+    </div>
+
+    <h1>Build Something Amazing.</h1>
+
+    <p>
+      Website modern dengan tampilan futuristik,
+      animasi halus, dan desain yang responsif
+      untuk perangkat HP maupun komputer.
+    </p>
+
+    <div class="buttons">
+      <a href="#features" class="btn primary">
+        Mulai Sekarang →
+      </a>
+
+      <a href="#about" class="btn secondary">
+        Pelajari
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+  <section id="features">
+
+    <div class="title">
+      <h2>Features</h2>
+      <p>Sederhana, modern, dan powerful.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Fast</h3>
+        <p>
+          Dibuat ringan supaya website
+          tetap cepat dibuka di HP.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Modern Design</h3>
+        <p>
+          Menggunakan glass effect,
+          gradient dan animasi modern.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Responsive</h3>
+        <p>
+          Tampilan otomatis menyesuaikan
+          layar HP, tablet, dan PC.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h3>Simple</h3>
+        <p>
+          Tidak membutuhkan framework.
+          Cukup satu file HTML.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <div class="title">
+      <h2>About</h2>
+      <p>Website sederhana yang bisa lo kembangkan.</p>
+    </div>
+
+    <div class="about">
+
+      <div class="about-box">
+        <h2>🚀 Your Website</h2>
+        <br>
+        <p>
+          Semua bagian website ini bisa lo ubah,
+          mulai dari nama, warna, tulisan,
+          gambar, tombol sampai animasinya.
+        </p>
+      </div>
+
+      <div class="about-box">
+        <h2>💎 Make It Yours</h2>
+        <br>
+        <p>
+          Tambahkan foto, biodata, project,
+          galeri, kontak, atau fitur lain
+          sesuai kebutuhan website lo.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    © 2026 NEXORA — Made with HTML & CSS
+  </footer>
+
+</body>
+</html>
